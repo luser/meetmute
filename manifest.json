@@ -1,34 +1,38 @@
 {
     "manifest_version": 2,
-
     "name": "Meetmute",
-    "description": "This extension provides keyboard shortcuts to toggle your microphone and camera in Google Meet and Hangouts",
+    "description": "This extension provides keyboard shortcuts to toggle your microphone in Google Meet",
     "version": "1.0",
+    "homepage_url": "https://github.com/luser/meetmute",
+    "icons": {
+        "32": "meetmute32.png",
+        "128": "meetmute128.png"
+    },
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
+    "content_scripts": [
+        {
+            "matches": ["https://meet.google.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
+    },
     "commands": {
-        "toggleMic": {
+        "toggle_mute": {
             "suggested_key": {
-                "default": "Ctrl+Shift+7"
+                "default": "Ctrl+Shift+A"
             },
-            "global": true,
-            "description": "Toggle Microphone in Meet/Hangouts"
-        },
-        "toggleCam": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+8"
-            },
-            "global": true,
-            "description": "Toggle Webcam in Meet/Hangouts"
+            "description": "Toggle Microphone in Google Meet"
         }
     },
-
     "permissions": [
-        "activeTab",
+        "storage",
         "tabs",
-        "https://hangouts.google.com/",
         "https://meet.google.com/"
     ]
 }
